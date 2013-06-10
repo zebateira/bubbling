@@ -1,0 +1,74 @@
+<title>0</title>
+
+<audio id="pssiu" controls style="display: none;" preload>
+          <source src="pssiu.mp3" type="audio/mpeg">
+          <source src="pssiu.wav" type="audio/wav">
+</audio>
+
+
+<style>
+	body {
+		background-color: white;
+		overflow: hidden;
+	}
+
+	div.spot {
+		display: inline-block;
+		position: absolute;
+		min-width: 5px;
+		min-height: 5px;
+		border-radius: 100px;
+	}
+
+</style>
+
+<script type="text/javascript">
+	window.onload = function() {
+		var isStopped = false
+		var pssiu = document.getElementById('pssiu')
+
+		var doUrThing = function() {
+			document.title++
+
+			var randSize = Math.random() * 200
+
+			var spot = document.createElement('div')
+			spot.className = 'spot'
+
+			document.body.appendChild(spot)
+
+			spot.style.width = randSize
+			spot.style.height = randSize
+			spot.style.left = Math.random() * window.innerWidth - 100 + 'px'
+			spot.style.top = Math.random() * window.innerHeight - 100 + 'px'
+			spot.style.backgroundColor = (Math.random() * 0xffffff << 0).toString(16)
+
+			spot.onmouseover = function() {
+				// pssiu.play()
+				this.style.backgroundColor = "white"
+				this.style.left = -9999 + 'px'
+				document.title--;
+				this.onmouseover = undefined
+			}
+
+			if( !isStopped )
+				setTimeout(doUrThing, Math.random() * 10)
+		}
+
+		doUrThing()
+
+		window.onkeypress = function (event) {
+			if( event.keyCode == 32 ) {
+				if ( isStopped ) {
+					isStopped = false
+					doUrThing()
+				}
+				else
+					isStopped = true
+			}
+		}
+
+
+	}
+	
+</script>
