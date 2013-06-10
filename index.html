@@ -65,11 +65,13 @@
 		min-height: 5px;
 		border-radius: 100px;
 		background: white;
-		/*
+	}
+
+	div.spot.animated {
 		-webkit-animation: movespot infinite;
 		-moz-animation: movespot infinite;
 		-o-animation: movespot infinite;
-		animation: movespot infinite;*/
+		animation: movespot infinite;
 	}
 
 </style>
@@ -80,6 +82,7 @@
 		var inc = 500
 		var max = 1000
 		var min = Math.random() * 800
+		var areAnimated = false
 
 		console.log(min)
 
@@ -94,7 +97,10 @@
 			document.title++
 
 			var spot = document.createElement('div')
-			spot.className = 'spot'
+			spot.classList.add('spot')
+
+			if( areAnimated )
+				spot.classList.add('animated')
 
 			document.body.appendChild(spot)
 
@@ -129,14 +135,29 @@
 			if( event.keyCode == 32 ) {
 				if ( isStopped ) {
 					isStopped = false
+					max = 5000
 					doUrThing()
 				}
 				else {
 					isStopped = true
 				}
 			}
-			console.log(isStopped)
-			console.log(inc)
+			else if( event.keyCode == 13 ) {
+				areAnimated = !areAnimated
+
+				var spots = document.getElementsByClassName('spot')
+
+				// TODO add random animation
+				if( areAnimated ) {
+					for (var i = 0; i < spots.length; i++) {
+						spots[i].classList.add('animated')
+					}
+				} else if( !areAnimated ) {
+					for (var i = 0; i < spots.length; i++) {
+						spots[i].classList.remove('animated')
+					}
+				}
+			}
 
 			return false
 		}
