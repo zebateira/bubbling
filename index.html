@@ -1,25 +1,58 @@
 <title>0</title>
-
 <style>
 
 	@-webkit-keyframes movespot {
-		from {  }
-		to { height: 0px; width: 0px; top: 50%; left: 50%; }
+		0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+		10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+		20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+		30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+		40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+		50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+		60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+		70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+		80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+		90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+		100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
 	}
 	@-o-keyframes movespot {
-		from {  }
-		to { height: 0px; width: 0px; top: 50%; left: 50%; }
+		0% { -o-transform: translate(2px, 1px) rotate(0deg); }
+		10% { -o-transform: translate(-1px, -2px) rotate(-1deg); }
+		20% { -o-transform: translate(-3px, 0px) rotate(1deg); }
+		30% { -o-transform: translate(0px, 2px) rotate(0deg); }
+		40% { -o-transform: translate(1px, -1px) rotate(1deg); }
+		50% { -o-transform: translate(-1px, 2px) rotate(-1deg); }
+		60% { -o-transform: translate(-3px, 1px) rotate(0deg); }
+		70% { -o-transform: translate(2px, 1px) rotate(-1deg); }
+		80% { -o-transform: translate(-1px, -1px) rotate(1deg); }
+		90% { -o-transform: translate(2px, 2px) rotate(0deg); }
+		100% { -o-transform: translate(1px, -2px) rotate(-1deg); }
 	}
 	@-moz-keyframes movespot {
-		from {  }
-		to { height: 0px; width: 0px; top: 50%; left: 50%; }
+		0% { -moz-transform: translate(2px, 1px) rotate(0deg); }
+		10% { -moz-transform: translate(-1px, -2px) rotate(-1deg); }
+		20% { -moz-transform: translate(-3px, 0px) rotate(1deg); }
+		30% { -moz-transform: translate(0px, 2px) rotate(0deg); }
+		40% { -moz-transform: translate(1px, -1px) rotate(1deg); }
+		50% { -moz-transform: translate(-1px, 2px) rotate(-1deg); }
+		60% { -moz-transform: translate(-3px, 1px) rotate(0deg); }
+		70% { -moz-transform: translate(2px, 1px) rotate(-1deg); }
+		80% { -moz-transform: translate(-1px, -1px) rotate(1deg); }
+		90% { -moz-transform: translate(2px, 2px) rotate(0deg); }
+		100% { -moz-transform: translate(1px, -2px) rotate(-1deg); }
 	}
 	@keyframes movespot {
-		from {   }
-		to { height: 0px; width: 0px; top: 50%; left: 50%; }
+		0% { transform: translate(2px, 1px) rotate(0deg); }
+		10% { transform: translate(-1px, -2px) rotate(-1deg); }
+		20% { transform: translate(-3px, 0px) rotate(1deg); }
+		30% { transform: translate(0px, 2px) rotate(0deg); }
+		40% { transform: translate(1px, -1px) rotate(1deg); }
+		50% { transform: translate(-1px, 2px) rotate(-1deg); }
+		60% { transform: translate(-3px, 1px) rotate(0deg); }
+		70% { transform: translate(2px, 1px) rotate(-1deg); }
+		80% { transform: translate(-1px, -1px) rotate(1deg); }
+		90% { transform: translate(2px, 2px) rotate(0deg); }
+		100% { transform: translate(1px, -2px) rotate(-1deg); }
 	}
-
-
 
 	body {
 		background: black;
@@ -32,10 +65,11 @@
 		min-height: 5px;
 		border-radius: 100px;
 		background: white;
-/*
-		-webkit-animation: movespot 500;
-		-o-animation: movespot 500;
-		animation: movespot 500;*/
+		/*
+		-webkit-animation: movespot infinite;
+		-moz-animation: movespot infinite;
+		-o-animation: movespot infinite;
+		animation: movespot infinite;*/
 	}
 
 </style>
@@ -43,31 +77,50 @@
 <script type="text/javascript">
 	window.onload = function() {
 		var isStopped = false
+		var inc = 500
+		var max = 1000
+		var min = Math.random() * 800
 
-		var doUrThing = function() {
+		console.log(min)
+
+		document.body.onmouseover = function(e) {
+			if( e.toElement != document.body ) {
+				e.target.style.display = 'none'
+				document.title--;
+			}
+		}
+
+		var addSpot = function () {
 			document.title++
-
-			var randSize = Math.random() * 200
 
 			var spot = document.createElement('div')
 			spot.className = 'spot'
 
 			document.body.appendChild(spot)
 
-			spot.style.width = randSize
-			spot.style.height = randSize
-			spot.style.left = Math.random() * window.innerWidth - 50 + 'px'
-			spot.style.top = Math.random() * window.innerHeight - 50 + 'px'
+			var randSize = Math.random()
+			spot.style.webkitAnimationDuration = randSize * 10 + 's'
+			spot.style.mozAnimationDuration = randSize * 10 + 's'
+			spot.style.oAnimationDuration = randSize * 10 + 's'
+			spot.style.animationDuration = randSize * 10 + 's'
+
+			randSize *= 200
+			spot.style.width = randSize + 'px'
+			spot.style.height = randSize + 'px'
+
+			spot.style.left = Math.random() * window.innerWidth - randSize * 0.50 + 'px'
+			spot.style.top = Math.random() * window.innerHeight - randSize * 0.50 + 'px'
 			spot.style.opacity = Math.random()
+		}
 
-			spot.onmouseover = function() {
-				this.style.display = 'none'
-				document.title--;
-				this.onmouseover = undefined
+		var doUrThing = function() {
+			if( document.title > max && !isStopped )
+				isStopped = true
+
+			if( !isStopped ) {
+				addSpot()
+				setTimeout(doUrThing, inc <= 0 ? 1 : inc -= 15)
 			}
-
-			if( !isStopped )
-				setTimeout(doUrThing, 1)
 		}
 
 		doUrThing()
@@ -78,9 +131,14 @@
 					isStopped = false
 					doUrThing()
 				}
-				else
+				else {
 					isStopped = true
+				}
 			}
+			console.log(isStopped)
+			console.log(inc)
+
+			return false
 		}
 
 
