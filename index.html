@@ -1,23 +1,41 @@
 <title>0</title>
 
-<audio id="pssiu" controls style="display: none;" preload>
-          <source src="pssiu.mp3" type="audio/mpeg">
-          <source src="pssiu.wav" type="audio/wav">
-</audio>
-
-
 <style>
+
+	@-webkit-keyframes movespot {
+		from {  }
+		to { height: 0px; width: 0px; top: 50%; left: 50%; }
+	}
+	@-o-keyframes movespot {
+		from {  }
+		to { height: 0px; width: 0px; top: 50%; left: 50%; }
+	}
+	@-moz-keyframes movespot {
+		from {  }
+		to { height: 0px; width: 0px; top: 50%; left: 50%; }
+	}
+	@keyframes movespot {
+		from {   }
+		to { height: 0px; width: 0px; top: 50%; left: 50%; }
+	}
+
+
+
 	body {
-		background-color: white;
+		background: black;
 		overflow: hidden;
 	}
 
 	div.spot {
-		display: inline-block;
 		position: absolute;
 		min-width: 5px;
 		min-height: 5px;
 		border-radius: 100px;
+		background: white;
+/*
+		-webkit-animation: movespot 500;
+		-o-animation: movespot 500;
+		animation: movespot 500;*/
 	}
 
 </style>
@@ -25,7 +43,6 @@
 <script type="text/javascript">
 	window.onload = function() {
 		var isStopped = false
-		var pssiu = document.getElementById('pssiu')
 
 		var doUrThing = function() {
 			document.title++
@@ -39,20 +56,18 @@
 
 			spot.style.width = randSize
 			spot.style.height = randSize
-			spot.style.left = Math.random() * window.innerWidth - 100 + 'px'
-			spot.style.top = Math.random() * window.innerHeight - 100 + 'px'
-			spot.style.backgroundColor = (Math.random() * 0xffffff << 0).toString(16)
+			spot.style.left = Math.random() * window.innerWidth - 50 + 'px'
+			spot.style.top = Math.random() * window.innerHeight - 50 + 'px'
+			spot.style.opacity = Math.random()
 
 			spot.onmouseover = function() {
-				// pssiu.play()
-				this.style.backgroundColor = "white"
-				this.style.left = -9999 + 'px'
+				this.style.display = 'none'
 				document.title--;
 				this.onmouseover = undefined
 			}
 
 			if( !isStopped )
-				setTimeout(doUrThing, Math.random() * 10)
+				setTimeout(doUrThing, 1)
 		}
 
 		doUrThing()
